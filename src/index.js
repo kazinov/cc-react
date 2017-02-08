@@ -5,7 +5,6 @@ import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 import configureStore from './store/configureStore';
 
-console.log('here');
 const store = configureStore();
 render(
 <Provider store={store}>
