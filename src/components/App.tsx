@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
+import * as React from 'react';
 import {connect} from 'react-redux';
 
-class App extends React.Component {
+class App extends React.Component<any, any> {
     render() {
         return (
             <div>
@@ -10,10 +10,6 @@ class App extends React.Component {
         );
     }
 }
-
-App.propTypes = {
-    children: PropTypes.object.isRequired
-};
 
 function mapStateToProps(state, ownProps) {
     return {

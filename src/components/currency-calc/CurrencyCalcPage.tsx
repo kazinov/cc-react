@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 
-class CurrencyCalcPage extends React.Component {
+class CurrencyCalcPage extends React.Component<any, any> {
   render() {
     return (
       <div>
