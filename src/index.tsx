@@ -3,9 +3,9 @@ import { render } from 'react-dom';
 import {Provider} from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
-import configureStore from './store/configureStore';
+import configureStore from './store/configure-store';
 
-const store = configureStore(null);
+const store = configureStore(undefined);
 render(
 <Provider store={store}>
     <Router history={browserHistory} routes={routes} />
