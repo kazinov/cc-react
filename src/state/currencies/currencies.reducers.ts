@@ -1,5 +1,4 @@
 import {IReduxAction} from "../index.d";
-import {ICurrencyLine} from "../../components/currency-calc/currency-calc.page.reducers";
 import {InitialState} from '../initial-state';
 import {CurrenciesActionTypes} from './currencies.actions'
 

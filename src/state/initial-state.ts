@@ -1,4 +1,4 @@
-import {ICurrencyCalcPageState} from "../components/currency-calc/currency-calc.page.reducers";
+import {ICurrencyCalcPageState} from "../components/currency-calc/state/currency-calc.page.reducers";
 import {ICurrency} from "./currencies/currencies.reducers";
 
 export interface IState {

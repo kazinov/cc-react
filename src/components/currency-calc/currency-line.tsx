@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ICurrencyLine} from "./currency-calc.page.reducers";
+import {ICurrencyLine} from "./state/currency-calc.page.reducers";
 import {ICurrency} from "../../state/currencies/currencies.reducers";
 
 interface ICurrencyLineParams {

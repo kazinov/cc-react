@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {currencyCalcPageReducer} from '../components/currency-calc/currency-calc.page.reducers';
+import {currencyCalcPageReducer} from '../components/currency-calc/state/currency-calc.page.reducers';
 import {currenciesReducer} from './currencies/currencies.reducers';
 
 const rootReducer = combineReducers({

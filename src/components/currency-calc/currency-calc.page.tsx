@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { currencyCalcPageActions } from './currency-calc.page.actions';
+import { currencyCalcPageActions } from './state/currency-calc.page.actions';
 import {IState} from '../../state/initial-state';
 import CurrencyLine from './currency-line'
 import {ICurrency} from "../../state/currencies/currencies.reducers";

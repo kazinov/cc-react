@@ -1,6 +1,6 @@
 import { CurrencyCalcPageActionTypes } from './currency-calc.page.actions';
-import {InitialState} from '../../state/initial-state';
-import {IReduxAction} from "../../state/index.d.ts";
+import {InitialState} from '../../../state/initial-state';
+import {IReduxAction} from "../../../state/index.d.ts";
 import {combineReducers} from 'redux';
 
 export interface ICurrencyLine {
