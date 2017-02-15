@@ -1,5 +1,4 @@
 import { CurrencyCalcPageActionTypes } from './currency-calc.page.actions';
-import {InitialState} from '../../../state/initial-state';
 import {IReduxAction} from "../../../state/index.d.ts";
 import {combineReducers} from 'redux';
 
@@ -31,7 +30,7 @@ export const currencyCalcPageReducer = combineReducers({
 
 export function currencyLinesReducer(state:ICurrencyLine[], action:ICurrencyLinesAction):ICurrencyLine[] {
 	if (!state) {
-		state = InitialState.currencyLinePage.currencyLines;
+		state = [];
 	}
 
 	switch (action.type) {

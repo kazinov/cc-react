@@ -1,5 +1,4 @@
 import {IReduxAction} from "../index.d";
-import {InitialState} from '../initial-state';
 import {CurrenciesActionTypes} from './currencies.actions'
 
 export interface ICurrency {
@@ -12,7 +11,7 @@ export interface ICurrenciesAction extends IReduxAction {
 
 export function currenciesReducer(state:ICurrency[], action:ICurrenciesAction):ICurrency[] {
 	if (!state) {
-		state = InitialState.currencies;
+		state = [];
 	}
 
 	switch (action.type) {

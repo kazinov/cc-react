@@ -6,6 +6,7 @@ import routes from './routes';
 import configureStore from './state/configure-store';
 import { currenciesActions } from './state/currencies/currencies.actions';
 
+
 const store = configureStore(undefined);
 store.dispatch(currenciesActions.fetchCurrencies());
 
