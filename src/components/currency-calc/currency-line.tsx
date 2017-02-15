@@ -4,9 +4,9 @@ import {ICurrency} from "../../state/currencies/currencies.reducers";
 
 interface ICurrencyLineParams {
 	line: ICurrencyLine,
+	currencies: ICurrency[];
 	onValueChange: any,
 	onCurrencyChange: any,
-	currencies: ICurrency[];
 }
 const CurrencyLine = (params:ICurrencyLineParams) => {
 	return (

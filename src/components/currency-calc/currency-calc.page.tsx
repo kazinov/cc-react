@@ -1,45 +1,49 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import { currencyCalcPageActions } from './state/currency-calc.page.actions';
-import {IState} from '../../state/initial-state';
 import CurrencyLine from './currency-line'
 import {ICurrency} from "../../state/currencies/currencies.reducers";
+import {ICurrencyLine} from "./state/currency-calc.page.reducers";
+
+interface ICurrencyCalcPageProps {
+	lines: ICurrencyLine[],
+	currencies: ICurrency[];
+	onAddCurrencyLineClick: any;
+	onCurrencyLineValueChange: any,
+	onCurrencyLineCurrencyChange: any,
+}
 
 class CurrencyCalcPage extends React.Component<any, any> {
-	constructor(props, context) {
+	constructor(props: ICurrencyCalcPageProps, context) {
 		super(props, context);
-		this.addLine = this.addLine.bind(this);
+		this.onAddCurrencyLineClick = this.onAddCurrencyLineClick.bind(this);
 		this.onCurrencyLineValueChange = this.onCurrencyLineValueChange.bind(this);
 		this.onCurrencyLineCurrencyChange = this.onCurrencyLineCurrencyChange.bind(this);
 	}
 
-	addLine(event) {
+	onAddCurrencyLineClick(event) {
 		event.preventDefault();
-		this.props.actions.addCurrencyLine();
+		this.props.onAddCurrencyLineClick();
 	}
 
 	onCurrencyLineValueChange(event, index) {
 		event.preventDefault();
-		this.props.actions.changeCurrencyLineValue(event.target.value, index);
+		this.props.onCurrencyLineValueChange(event.target.value, index);
 	}
 
 	onCurrencyLineCurrencyChange(event, index) {
-		console.log('onCurrencyLineCurrencyChange', event.target.value, index)
 		event.preventDefault();
-		this.props.actions.changeCurrencyLineCurrency(event.target.value, index);
+		this.props.onCurrencyLineCurrencyChange(event.target.value, index);
 	}
 
 	render() {
-		const {currencyLines, currencies} = this.props;
+		const {lines, currencies} = this.props;
 		return (
 			<div>
 				<h2>currency calc page</h2>
 				<button
-					onClick={this.addLine}>
+					onClick={this.onAddCurrencyLineClick}>
 					Add line
 				</button>
-				{currencyLines && currencyLines.map((line, i) =>
+				{lines.map((line, i) =>
 						<CurrencyLine key={i}
 									  line={line}
 									  currencies={currencies}
@@ -51,17 +55,4 @@ class CurrencyCalcPage extends React.Component<any, any> {
 	}
 }
 
-function mapStateToProps(state:IState, ownProps) {
-	return {
-		currencyLines: state.currencyLinePage.currencyLines,
-		currencies: state.currencies
-	};
-}
-
-function mapDispatchToProps(dispatch) {
-	return {
-		actions: bindActionCreators(currencyCalcPageActions, dispatch)
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CurrencyCalcPage);
+export default CurrencyCalcPage;
