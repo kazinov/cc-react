@@ -2,7 +2,8 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { currencyCalcPageActions } from './currency-calc.page.actions';
-import {IState} from "../../reducers/initial-state";
+import {IState} from '../../reducers/initial-state';
+import CurrencyLine from './currency-line'
 
 class CurrencyCalcPage extends React.Component<any, any> {
 	constructor(props, context) {
@@ -31,11 +32,9 @@ class CurrencyCalcPage extends React.Component<any, any> {
 					Add line
 				</button>
 				{currencyLines && currencyLines.map((line, i) =>
-				<div key={i}>
-					<input type="number"
-						   value={line.value}
-						   onChange={($event) => this.onCurrencyLineValueChange($event, i)}/>
-				</div>
+						<CurrencyLine key={i}
+									  line={line}
+									  onValueChange={($event) => this.onCurrencyLineValueChange($event, i)}></CurrencyLine>
 					)}
 			</div>
 		);
