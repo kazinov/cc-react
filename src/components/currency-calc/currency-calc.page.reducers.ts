@@ -1,10 +1,11 @@
 import { CurrencyCalcPageActionTypes } from './currency-calc.page.actions';
-import {InitialState} from '../../reducers/initial-state';
-import {IReduxAction} from "../../reducers/index.d.ts";
+import {InitialState} from '../../state/initial-state';
+import {IReduxAction} from "../../state/index.d.ts";
 import {combineReducers} from 'redux';
 
 export interface ICurrencyLine {
 	value: number;
+	currencyId: string;
 }
 
 export interface ICurrencyCalcPageState {
@@ -20,8 +21,10 @@ export interface ICurrencyLinesAction extends IReduxAction, ICurrencyLineAction 
 
 export interface ICurrencyLineAction extends IReduxAction {
 	value?: number;
+	currencyId?: string;
 }
 
+export const defaultCurrencyId = 'euro';
 export const currencyCalcPageReducer = combineReducers({
 	currencyLines: currencyLinesReducer
 });
@@ -36,10 +39,18 @@ export function currencyLinesReducer(state:ICurrencyLine[], action:ICurrencyLine
 			return [
 				...state,
 				{
-					value: 0
+					value: 0,
+					currencyId: defaultCurrencyId
 				}
 			];
 		case CurrencyCalcPageActionTypes.ChangeCurrencyLineValue:
+			return state.map((line: ICurrencyLine, index) => {
+				if (index === action.index) {
+					return currencyLineReducer(line, action);
+				}
+				return line;
+			});
+		case CurrencyCalcPageActionTypes.ChangeCurrencyLineCurrency:
 			return state.map((line: ICurrencyLine, index) => {
 				if (index === action.index) {
 					return currencyLineReducer(line, action);
@@ -56,7 +67,11 @@ export function currencyLineReducer(state:ICurrencyLine, action:ICurrencyLineAct
 		case CurrencyCalcPageActionTypes.ChangeCurrencyLineValue:
 			return Object.assign({}, state, {
 				value: action.value
-			})
+			});
+		case CurrencyCalcPageActionTypes.ChangeCurrencyLineCurrency:
+			return Object.assign({}, state, {
+				currencyId: action.currencyId
+			});
 		default:
 			return state;
 	}

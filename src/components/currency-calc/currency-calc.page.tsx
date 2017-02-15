@@ -2,14 +2,16 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { currencyCalcPageActions } from './currency-calc.page.actions';
-import {IState} from '../../reducers/initial-state';
+import {IState} from '../../state/initial-state';
 import CurrencyLine from './currency-line'
+import {ICurrency} from "../../state/currencies/currencies.reducers";
 
 class CurrencyCalcPage extends React.Component<any, any> {
 	constructor(props, context) {
 		super(props, context);
 		this.addLine = this.addLine.bind(this);
 		this.onCurrencyLineValueChange = this.onCurrencyLineValueChange.bind(this);
+		this.onCurrencyLineCurrencyChange = this.onCurrencyLineCurrencyChange.bind(this);
 	}
 
 	addLine(event) {
@@ -22,8 +24,14 @@ class CurrencyCalcPage extends React.Component<any, any> {
 		this.props.actions.changeCurrencyLineValue(event.target.value, index);
 	}
 
+	onCurrencyLineCurrencyChange(event, index) {
+		console.log('onCurrencyLineCurrencyChange', event.target.value, index)
+		event.preventDefault();
+		this.props.actions.changeCurrencyLineCurrency(event.target.value, index);
+	}
+
 	render() {
-		const {currencyLines} = this.props;
+		const {currencyLines, currencies} = this.props;
 		return (
 			<div>
 				<h2>currency calc page</h2>
@@ -34,7 +42,9 @@ class CurrencyCalcPage extends React.Component<any, any> {
 				{currencyLines && currencyLines.map((line, i) =>
 						<CurrencyLine key={i}
 									  line={line}
-									  onValueChange={($event) => this.onCurrencyLineValueChange($event, i)}></CurrencyLine>
+									  currencies={currencies}
+									  onValueChange={($event) => this.onCurrencyLineValueChange($event, i)}
+									  onCurrencyChange={($event) => this.onCurrencyLineCurrencyChange($event, i)}></CurrencyLine>
 					)}
 			</div>
 		);
@@ -43,7 +53,8 @@ class CurrencyCalcPage extends React.Component<any, any> {
 
 function mapStateToProps(state:IState, ownProps) {
 	return {
-		currencyLines: state.currencyLinePage.currencyLines
+		currencyLines: state.currencyLinePage.currencyLines,
+		currencies: state.currencies
 	};
 }
 
