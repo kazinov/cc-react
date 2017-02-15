@@ -1,11 +1,11 @@
-export interface ICurrencyLine {
-
-}
+import {ICurrencyCalcPageState} from "../components/currency-calc/currency-calc.page.reducers";
 
 export interface IState {
-  currencyLines: ICurrencyLine[];
+  currencyLinePage: ICurrencyCalcPageState
 }
 
 export const InitialState: IState = {
-  currencyLines: []
+  currencyLinePage: {
+    currencyLines: []
+  }
 };

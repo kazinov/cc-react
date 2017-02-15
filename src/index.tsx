@@ -6,10 +6,15 @@ import routes from './routes';
 import configureStore from './store/configure-store';
 
 const store = configureStore(undefined);
+store.subscribe(() => {
+		console.log('store', store.getState());
+	}
+)
+
 render(
-<Provider store={store}>
-    <Router history={browserHistory} routes={routes} />
-    </Provider>,
-    document.getElementById('app')
+	<Provider store={store}>
+		<Router history={browserHistory} routes={routes}/>
+	</Provider>,
+	document.getElementById('app')
 );
 

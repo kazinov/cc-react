@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import currencyLineReducer from './currency-line.reducer';
+import {currencyCalcPageReducer} from '../components/currency-calc/currency-calc.page.reducers';
 
 const rootReducer = combineReducers({
-	currencyLines: currencyLineReducer
+	currencyLinePage: currencyCalcPageReducer
 });
 
 export default rootReducer;
