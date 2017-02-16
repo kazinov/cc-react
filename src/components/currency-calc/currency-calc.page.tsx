@@ -2,6 +2,7 @@ import * as React from 'react';
 import CurrencyLine from './currency-line'
 import {ICurrency, CurrencyId} from "../../state/currencies/currencies.reducers";
 import {ICurrencyLine} from "./state/currency-calc.page.reducers";
+import CurrencyDropdown from "./currency-dropdown";
 
 interface ICurrencyCalcPageProps {
 	lines: ICurrencyLine[],
@@ -61,12 +62,11 @@ class CurrencyCalcPage extends React.Component<any, any> {
 					)}
 				<div>
 					Sum: {sum}
-					<select value={sumCurrencyId}
-							onChange={this.onSumCurrencyChange}>
-						{currencies.map((currency: ICurrency, i) =>
-						<option key={i} value={currency.id}>{currency.name}</option>
-								)}
-					</select>
+					<CurrencyDropdown
+							currencyId={sumCurrencyId}
+							onCurrencyChange={this.onSumCurrencyChange}
+							currencies={currencies}
+					></CurrencyDropdown>
 				</div>
 			</div>
 		);

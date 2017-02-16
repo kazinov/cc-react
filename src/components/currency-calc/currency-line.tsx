@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {ICurrencyLine} from "./state/currency-calc.page.reducers";
 import {ICurrency} from "../../state/currencies/currencies.reducers";
+import CurrencyDropdown from "./currency-dropdown";
 
 interface ICurrencyLineParams {
 	line: ICurrencyLine,
@@ -14,12 +15,11 @@ const CurrencyLine = (params:ICurrencyLineParams) => {
 			<input type="number"
 				   value={params.line.value}
 				   onChange={params.onValueChange}/>
-			<select value={params.line.currencyId}
-					onChange={params.onCurrencyChange}>
-				{params.currencies.map((currency: ICurrency, i) =>
-				<option key={i} value={currency.id}>{currency.name}</option>
-					)}
-			</select>
+			<CurrencyDropdown
+					currencyId={params.line.currencyId}
+					onCurrencyChange={params.onCurrencyChange}
+					currencies={params.currencies}
+			></CurrencyDropdown>
 		</div>
 	);
 };

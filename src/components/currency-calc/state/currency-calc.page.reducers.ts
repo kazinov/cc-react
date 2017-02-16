@@ -5,7 +5,7 @@ import {CurrencyId} from "../../../state/currencies/currencies.reducers";
 
 export interface ICurrencyLine {
 	value: number;
-	currencyId: string;
+	currencyId: CurrencyId;
 }
 
 export interface ICurrencyCalcPageState {
