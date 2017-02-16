@@ -3,22 +3,22 @@ import {ICurrencyLine} from "./state/currency-calc.page.reducers";
 import {ICurrency} from "../../state/currencies/currencies.reducers";
 import CurrencyDropdown from "./currency-dropdown";
 
-interface ICurrencyLineParams {
+interface ICurrencyLineProps {
 	line: ICurrencyLine,
 	currencies: ICurrency[];
 	onValueChange: any,
 	onCurrencyChange: any,
 }
-const CurrencyLine = (params:ICurrencyLineParams) => {
+const CurrencyLine = (props:ICurrencyLineProps) => {
 	return (
 		<div>
 			<input type="number"
-				   value={params.line.value}
-				   onChange={params.onValueChange}/>
+				   value={props.line.value}
+				   onChange={props.onValueChange}/>
 			<CurrencyDropdown
-					currencyId={params.line.currencyId}
-					onCurrencyChange={params.onCurrencyChange}
-					currencies={params.currencies}
+					currencyId={props.line.currencyId}
+					onCurrencyChange={props.onCurrencyChange}
+					currencies={props.currencies}
 			></CurrencyDropdown>
 		</div>
 	);

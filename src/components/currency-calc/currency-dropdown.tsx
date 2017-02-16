@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {ICurrency, CurrencyId} from "../../state/currencies/currencies.reducers";
 
-interface ICurrencyDropdownParams {
+interface ICurrencyDropdownProps {
 	currencyId: CurrencyId,
 	currencies: ICurrency[];
 	onCurrencyChange: any,
 }
-const CurrencyDropdown = (params:ICurrencyDropdownParams) => {
+const CurrencyDropdown = (props:ICurrencyDropdownProps) => {
 	return (
-		<select value={params.currencyId}
-				onChange={params.onCurrencyChange}>
-			{params.currencies.map((currency: ICurrency, i) =>
+		<select value={props.currencyId}
+				onChange={props.onCurrencyChange}>
+			{props.currencies.map((currency: ICurrency, i) =>
 			<option key={i} value={currency.id}>{currency.name}</option>
 				)}
 		</select>
