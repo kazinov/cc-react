@@ -1,11 +1,11 @@
 import * as React from 'react';
 import CurrencyLine from './currency-line'
 import {ICurrency, CurrencyId} from "../../state/currencies/currencies.reducers";
-import {ICurrencyLine} from "./state/currency-calc.page.reducers";
+import {ICurrencyUnit} from "./state/currency-calc.page.reducers";
 import CurrencyDropdown from "./currency-dropdown";
 
 interface ICurrencyCalcPageProps {
-	lines: ICurrencyLine[],
+	lines: ICurrencyUnit[],
 	currencies: ICurrency[];
 	sum: number,
 	sumCurrencyId: CurrencyId,
@@ -31,7 +31,7 @@ class CurrencyCalcPage extends React.Component<any, any> {
 
 	onCurrencyLineValueChange(event, index) {
 		event.preventDefault();
-		this.props.onCurrencyLineValueChange(event.target.value, index);
+		this.props.onCurrencyLineValueChange(parseFloat(event.target.value), index);
 	}
 
 	onCurrencyLineCurrencyChange(event, index) {
@@ -46,6 +46,7 @@ class CurrencyCalcPage extends React.Component<any, any> {
 
 	render() {
 		const {lines, currencies, sumCurrencyId, sum} = this.props;
+		const sumFormatted = Math.round(sum * 100) / 100;
 		return (
 			<div>
 				<h2>currency calc page</h2>
@@ -61,7 +62,7 @@ class CurrencyCalcPage extends React.Component<any, any> {
 									  onCurrencyChange={($event) => this.onCurrencyLineCurrencyChange($event, i)}></CurrencyLine>
 					)}
 				<div>
-					Sum: {sum}
+					Sum: {sumFormatted}
 					<CurrencyDropdown
 							currencyId={sumCurrencyId}
 							onCurrencyChange={this.onSumCurrencyChange}

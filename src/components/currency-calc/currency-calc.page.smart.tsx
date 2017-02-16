@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {currencyCalcPageActions} from './state/currency-calc.page.actions';
 import {IState} from '../../state/root-reducer';
 import CurrencyCalcPage from './currency-calc.page';
+import CurrencyService from "../../services/currency.service";
 
 class CurrencyCalcPageSmart extends React.Component<any, any> {
 	constructor(props, context) {
@@ -32,12 +33,12 @@ class CurrencyCalcPageSmart extends React.Component<any, any> {
 	}
 
 	render() {
-		const {currencyLines, currencies, sumCurrencyId} = this.props;
+		const {currencyLines, currencies, sumCurrencyId, sum} = this.props;
 		return (
 			<CurrencyCalcPage
 				lines={currencyLines}
 				currencies={currencies}
-				sum={3}
+				sum={sum}
 				sumCurrencyId={sumCurrencyId}
 				onSumCurrencyChange={this.onSumCurrencyChange}
 				onAddCurrencyLineClick={this.onAddCurrencyLineClick}
@@ -52,7 +53,11 @@ function mapStateToProps(state:IState, ownProps) {
 	return {
 		currencyLines: state.currencyLinePage.currencyLines,
 		sumCurrencyId: state.currencyLinePage.sumCurrencyId,
-		currencies: state.currencies
+		currencies: state.currencies,
+		sum: CurrencyService.calcCurrencySum(
+				state.currencyLinePage.currencyLines,
+				state.currencyLinePage.sumCurrencyId,
+				state.currencyRatesMap)
 	};
 }
 

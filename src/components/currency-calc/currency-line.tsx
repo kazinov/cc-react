@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {ICurrencyLine} from "./state/currency-calc.page.reducers";
+import {ICurrencyUnit} from "./state/currency-calc.page.reducers";
 import {ICurrency} from "../../state/currencies/currencies.reducers";
 import CurrencyDropdown from "./currency-dropdown";
 
 interface ICurrencyLineProps {
-	line: ICurrencyLine,
+	line: ICurrencyUnit,
 	currencies: ICurrency[];
 	onValueChange: any,
 	onCurrencyChange: any,

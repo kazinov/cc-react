@@ -3,13 +3,13 @@ import {IReduxAction} from "../../../state/index.d.ts";
 import {combineReducers} from 'redux';
 import {CurrencyId} from "../../../state/currencies/currencies.reducers";
 
-export interface ICurrencyLine {
+export interface ICurrencyUnit {
 	value: number;
 	currencyId: CurrencyId;
 }
 
 export interface ICurrencyCalcPageState {
-	currencyLines: ICurrencyLine[];
+	currencyLines: ICurrencyUnit[];
 	sumCurrencyId: CurrencyId
 }
 
@@ -18,7 +18,7 @@ export interface ICurrencyPageAction extends ICurrencyLinesAction, ICurrencyLine
 }
 
 export interface ICurrencyLinesAction extends IReduxAction, ICurrencyLineAction {
-	currencyLine?: ICurrencyLine;
+	currencyLine?: ICurrencyUnit;
 	index?:number;
 }
 
@@ -33,7 +33,7 @@ export const currencyCalcPageReducer = combineReducers({
 	sumCurrencyId: sumCurrencyReducer
 });
 
-export function currencyLinesReducer(state:ICurrencyLine[], action:ICurrencyLinesAction):ICurrencyLine[] {
+export function currencyLinesReducer(state:ICurrencyUnit[], action:ICurrencyLinesAction):ICurrencyUnit[] {
 	if (!state) {
 		state = [];
 	}
@@ -48,14 +48,14 @@ export function currencyLinesReducer(state:ICurrencyLine[], action:ICurrencyLine
 				}
 			];
 		case CurrencyCalcPageActionTypes.ChangeCurrencyLineValue:
-			return state.map((line: ICurrencyLine, index) => {
+			return state.map((line: ICurrencyUnit, index) => {
 				if (index === action.index) {
 					return currencyLineReducer(line, action);
 				}
 				return line;
 			});
 		case CurrencyCalcPageActionTypes.ChangeCurrencyLineCurrency:
-			return state.map((line: ICurrencyLine, index) => {
+			return state.map((line: ICurrencyUnit, index) => {
 				if (index === action.index) {
 					return currencyLineReducer(line, action);
 				}
@@ -66,7 +66,7 @@ export function currencyLinesReducer(state:ICurrencyLine[], action:ICurrencyLine
 	}
 }
 
-export function currencyLineReducer(state:ICurrencyLine, action:ICurrencyLineAction):ICurrencyLine {
+export function currencyLineReducer(state:ICurrencyUnit, action:ICurrencyLineAction):ICurrencyUnit {
 	switch (action.type) {
 		case CurrencyCalcPageActionTypes.ChangeCurrencyLineValue:
 			return Object.assign({}, state, {
