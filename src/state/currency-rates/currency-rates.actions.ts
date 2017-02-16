@@ -1,5 +1,7 @@
 import {ICurrencyRatesAction} from "./currency-rates.reducers";
 import {ICurrencyRate} from "./currency-rates.reducers";
+import {CurrencyId} from "../currencies/currencies.reducers";
+
 export const CurrencyRatesActionTypes = {
 	CurrencyRatesFetched: 'currency-rates-fetched'
 };
@@ -23,33 +25,33 @@ export function currencyRatesFetched(currencyRates:ICurrencyRate[]):ICurrencyRat
 
 let DummyCurrencyRates = [
 	{
-		fromId: 'usd',
-		toId: 'euro',
+		fromId: <CurrencyId>'usd',
+		toId: <CurrencyId>'euro',
 		rate: 0.96
 	},
 	{
-		fromId: 'euro',
-		toId: 'usd',
+		fromId: <CurrencyId>'euro',
+		toId: <CurrencyId>'usd',
 		rate: 1.04
 	},
 	{
-		fromId: 'usd',
-		toId: 'rub',
+		fromId: <CurrencyId>'usd',
+		toId: <CurrencyId>'rub',
 		rate: 60.98
 	},
 	{
-		fromId: 'rub',
-		toId: 'usd',
+		fromId: <CurrencyId>'rub',
+		toId: <CurrencyId>'usd',
 		rate: 0.016
 	},
 	{
-		fromId: 'rub',
-		toId: 'euro',
+		fromId: <CurrencyId>'rub',
+		toId: <CurrencyId>'euro',
 		rate: 0.016
 	},
 	{
-		fromId: 'euro',
-		toId: 'rub',
+		fromId: <CurrencyId>'euro',
+		toId: <CurrencyId>'rub',
 		rate: 63.71
 	}
 ];

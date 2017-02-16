@@ -1,6 +1,7 @@
 import { CurrencyCalcPageActionTypes } from './currency-calc.page.actions';
 import {IReduxAction} from "../../../state/index.d.ts";
 import {combineReducers} from 'redux';
+import {CurrencyId} from "../../../state/currencies/currencies.reducers";
 
 export interface ICurrencyLine {
 	value: number;
@@ -9,9 +10,12 @@ export interface ICurrencyLine {
 
 export interface ICurrencyCalcPageState {
 	currencyLines: ICurrencyLine[];
+	sumCurrencyId: CurrencyId
 }
 
-export interface ICurrencyPageAction extends ICurrencyLinesAction, ICurrencyLineAction { }
+export interface ICurrencyPageAction extends ICurrencyLinesAction, ICurrencyLineAction {
+	currencyId?: CurrencyId;
+}
 
 export interface ICurrencyLinesAction extends IReduxAction, ICurrencyLineAction {
 	currencyLine?: ICurrencyLine;
@@ -20,12 +24,13 @@ export interface ICurrencyLinesAction extends IReduxAction, ICurrencyLineAction 
 
 export interface ICurrencyLineAction extends IReduxAction {
 	value?: number;
-	currencyId?: string;
+	currencyId?: CurrencyId;
 }
 
-export const defaultCurrencyId = 'euro';
+export const defaultCurrencyId: CurrencyId = <CurrencyId>'euro';
 export const currencyCalcPageReducer = combineReducers({
-	currencyLines: currencyLinesReducer
+	currencyLines: currencyLinesReducer,
+	sumCurrencyId: sumCurrencyReducer
 });
 
 export function currencyLinesReducer(state:ICurrencyLine[], action:ICurrencyLinesAction):ICurrencyLine[] {
@@ -71,6 +76,19 @@ export function currencyLineReducer(state:ICurrencyLine, action:ICurrencyLineAct
 			return Object.assign({}, state, {
 				currencyId: action.currencyId
 			});
+		default:
+			return state;
+	}
+}
+
+export function sumCurrencyReducer(state:CurrencyId, action:ICurrencyPageAction):CurrencyId {
+	if (!state) {
+		state = defaultCurrencyId;
+	}
+
+	switch (action.type) {
+		case CurrencyCalcPageActionTypes.ChangeSumCurrency:
+			return action.currencyId;
 		default:
 			return state;
 	}

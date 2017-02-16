@@ -1,8 +1,10 @@
 import {IReduxAction} from "../index.d";
 import {CurrenciesActionTypes} from './currencies.actions'
 
+export type CurrencyId = 'rub' | 'euro' | 'usd';
+
 export interface ICurrency {
-	id: string,
+	id: CurrencyId,
 	name: string
 }
 

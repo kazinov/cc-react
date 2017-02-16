@@ -1,14 +1,17 @@
 import * as React from 'react';
 import CurrencyLine from './currency-line'
-import {ICurrency} from "../../state/currencies/currencies.reducers";
+import {ICurrency, CurrencyId} from "../../state/currencies/currencies.reducers";
 import {ICurrencyLine} from "./state/currency-calc.page.reducers";
 
 interface ICurrencyCalcPageProps {
 	lines: ICurrencyLine[],
 	currencies: ICurrency[];
+	sum: number,
+	sumCurrencyId: CurrencyId,
 	onAddCurrencyLineClick: any;
 	onCurrencyLineValueChange: any,
 	onCurrencyLineCurrencyChange: any,
+	onSumCurrencyChange: any
 }
 
 class CurrencyCalcPage extends React.Component<any, any> {
@@ -17,6 +20,7 @@ class CurrencyCalcPage extends React.Component<any, any> {
 		this.onAddCurrencyLineClick = this.onAddCurrencyLineClick.bind(this);
 		this.onCurrencyLineValueChange = this.onCurrencyLineValueChange.bind(this);
 		this.onCurrencyLineCurrencyChange = this.onCurrencyLineCurrencyChange.bind(this);
+		this.onSumCurrencyChange = this.onSumCurrencyChange.bind(this);
 	}
 
 	onAddCurrencyLineClick(event) {
@@ -34,8 +38,13 @@ class CurrencyCalcPage extends React.Component<any, any> {
 		this.props.onCurrencyLineCurrencyChange(event.target.value, index);
 	}
 
+	onSumCurrencyChange(event) {
+		event.preventDefault();
+		this.props.onSumCurrencyChange(event.target.value);
+	}
+
 	render() {
-		const {lines, currencies} = this.props;
+		const {lines, currencies, sumCurrencyId, sum} = this.props;
 		return (
 			<div>
 				<h2>currency calc page</h2>
@@ -50,6 +59,15 @@ class CurrencyCalcPage extends React.Component<any, any> {
 									  onValueChange={($event) => this.onCurrencyLineValueChange($event, i)}
 									  onCurrencyChange={($event) => this.onCurrencyLineCurrencyChange($event, i)}></CurrencyLine>
 					)}
+				<div>
+					Sum: {sum}
+					<select value={sumCurrencyId}
+							onChange={this.onSumCurrencyChange}>
+						{currencies.map((currency: ICurrency, i) =>
+						<option key={i} value={currency.id}>{currency.name}</option>
+								)}
+					</select>
+				</div>
 			</div>
 		);
 	}

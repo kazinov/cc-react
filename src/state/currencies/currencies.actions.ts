@@ -1,5 +1,5 @@
 import {ICurrenciesAction} from "./currencies.reducers";
-import {ICurrency} from "./currencies.reducers";
+import {ICurrency, CurrencyId} from "./currencies.reducers";
 
 export const CurrenciesActionTypes = {
 	CurrenciesFetched: 'currencies-fetched'
@@ -24,15 +24,15 @@ export function currenciesFetched(currencies:ICurrency[]):ICurrenciesAction {
 
 let DummyCurrencies = [
 	{
-		id: 'rub',
-		name: 'rub'
+		id: <CurrencyId>'rub',
+		name: <CurrencyId>'rub'
 	},
 	{
-		id: 'usd',
-		name: 'usd'
+		id: <CurrencyId>'usd',
+		name: <CurrencyId>'usd'
 	},
 	{
-		id: 'euro',
-		name: 'euro'
+		id: <CurrencyId>'euro',
+		name: <CurrencyId>'euro'
 	}
 ];

@@ -1,9 +1,10 @@
 import {IReduxAction} from "../index.d";
 import {CurrencyRatesActionTypes} from './currency-rates.actions'
+import {CurrencyId} from "../currencies/currencies.reducers";
 
 export interface ICurrencyRate {
-	fromId: string,
-	toId: string,
+	fromId: CurrencyId,
+	toId: CurrencyId,
 	rate: number
 }
 

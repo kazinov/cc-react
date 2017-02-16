@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {currencyCalcPageActions} from './state/currency-calc.page.actions';
-import {IState} from '../../state/initial-state';
+import {IState} from '../../state/root-reducer';
 import CurrencyCalcPage from './currency-calc.page';
 
 class CurrencyCalcPageSmart extends React.Component<any, any> {
@@ -12,6 +12,7 @@ class CurrencyCalcPageSmart extends React.Component<any, any> {
 		this.onAddCurrencyLineClick = this.onAddCurrencyLineClick.bind(this);
 		this.onCurrencyLineValueChange = this.onCurrencyLineValueChange.bind(this);
 		this.onCurrencyLineCurrencyChange = this.onCurrencyLineCurrencyChange.bind(this);
+		this.onSumCurrencyChange = this.onSumCurrencyChange.bind(this);
 	}
 
 	onAddCurrencyLineClick() {
@@ -26,12 +27,19 @@ class CurrencyCalcPageSmart extends React.Component<any, any> {
 		this.props.actions.changeCurrencyLineCurrency(currendyId, index);
 	}
 
+	onSumCurrencyChange(currendyId) {
+		this.props.actions.changeSumCurrency(currendyId);
+	}
+
 	render() {
-		const {currencyLines, currencies} = this.props;
+		const {currencyLines, currencies, sumCurrencyId} = this.props;
 		return (
 			<CurrencyCalcPage
 				lines={currencyLines}
 				currencies={currencies}
+				sum={3}
+				sumCurrencyId={sumCurrencyId}
+				onSumCurrencyChange={this.onSumCurrencyChange}
 				onAddCurrencyLineClick={this.onAddCurrencyLineClick}
 				onCurrencyLineValueChange={this.onCurrencyLineValueChange}
 				onCurrencyLineCurrencyChange={this.onCurrencyLineCurrencyChange}
@@ -43,6 +51,7 @@ class CurrencyCalcPageSmart extends React.Component<any, any> {
 function mapStateToProps(state:IState, ownProps) {
 	return {
 		currencyLines: state.currencyLinePage.currencyLines,
+		sumCurrencyId: state.currencyLinePage.sumCurrencyId,
 		currencies: state.currencies
 	};
 }
