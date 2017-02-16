@@ -7,6 +7,7 @@ export interface ICurrency {
 }
 
 export interface ICurrenciesAction extends IReduxAction {
+	currencies?: ICurrency[];
 }
 
 export function currenciesReducer(state:ICurrency[], action:ICurrenciesAction):ICurrency[] {
@@ -15,20 +16,9 @@ export function currenciesReducer(state:ICurrency[], action:ICurrenciesAction):I
 	}
 
 	switch (action.type) {
-		case CurrenciesActionTypes.FetchCurrencies:
+		case CurrenciesActionTypes.CurrenciesFetched:
 			return [
-				{
-					id: 'rub',
-					name: 'rub'
-				},
-				{
-					id: 'usd',
-					name: 'usd'
-				},
-				{
-					id: 'euro',
-					name: 'euro'
-				}
+				...action.currencies
 			];
 		default:
 			return state;
