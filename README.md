@@ -1,7 +1,1 @@
-TODO:
- - clean up
- - styling
- - less
- - animations
- - tests
- - prod build
+React + Typescript + Redux example
